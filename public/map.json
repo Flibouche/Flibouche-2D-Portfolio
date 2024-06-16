@@ -169,7 +169,7 @@
                 {
                  "height":16,
                  "id":17,
-                 "name":"",
+                 "name":"exit",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -477,7 +477,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -489,7 +489,7 @@
                 {
                  "height":0,
                  "id":10,
-                 "name":"",
+                 "name":"player",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -500,7 +500,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
