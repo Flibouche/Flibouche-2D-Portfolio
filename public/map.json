@@ -484,7 +484,7 @@
         {
          "draworder":"topdown",
          "id":4,
-         "name":"spawnpoint",
+         "name":"spawnpoints",
          "objects":[
                 {
                  "height":0,
