@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-    base: "/Flibouche-2D-Portfolio",
+    base: "<REPO>",
     build: {
         minify: "terser",
     },
