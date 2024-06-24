@@ -74,6 +74,7 @@ k.scene("main", async () => {
           player.onCollide(boundary.name, () => {
             player.isInDialogue = true; // Dès que le player touche la zone de collision de l'objet, on met le joueur en état de dialogue
             displayDialogue(dialogueData[boundary.name], () => (player.isInDialogue = false)); // On affiche un dialogue et on désactive l'état du dialogue une fois terminé
+            stopAnims();
           });
         }
       }
