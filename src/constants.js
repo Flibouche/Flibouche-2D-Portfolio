@@ -23,14 +23,14 @@ export const dialogueData = {
     bed:``,
     // Kitchen
     table:``,
-    guppy:``,
+    guppy:`This is my cat Guppy ! She gives me so much motivation every day, I love her so much !`,
     fridge:``,
     furnace:``,
     // Corridor
-    clock:``,
+    clock:`It is currently ${new Date().toLocaleTimeString()} !`,
     bathroom:``,
     toilet:``,
     stuff:``,
-    basement:``,
-    stairs:``,
+    basement:`Why are you looking for Isaac in the basement ?`,
+    stairs:`More to come...`,
 }
