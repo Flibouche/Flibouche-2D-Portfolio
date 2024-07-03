@@ -42,3 +42,4 @@ Note: You need `Node.js` and `npm` installed on your machine.
 ## Copyrights
 
 - Pixel Art visuals by : <a href="https://limezu.itch.io/moderninteriors">LimeZu</a>
+- This project is licensed under the MIT LIcense - see the <a href="https://github.com/Flibouche/Flibouche-2D-Portfolio/blob/main/LICENSE">LICENSE</a> file for details.
