@@ -48,6 +48,7 @@ k.scene("main", async () => {
       speed: 250,
       direction: "down",
       isInDialogue: false,
+      nearbyDialogueObject: null, // Ajout d'un état pour garder l'objet de dialogue à proximité
     },
     "player",
   ]);
@@ -68,12 +69,15 @@ k.scene("main", async () => {
           boundary.name, // On utilise le nom de l'objet comme étiquette
         ]);
 
-        // On vérifie si l'objeta un nom
+        // On vérifie si l'objet a un nom
         if (boundary.name) {
           // On ajoute une fonction de collision pour le joueur
           player.onCollide(boundary.name, () => {
-            player.isInDialogue = true; // Dès que le player touche la zone de collision de l'objet, on met le joueur en état de dialogue
-            displayDialogue(dialogueData[boundary.name], () => (player.isInDialogue = false)); // On affiche un dialogue et on désactive l'état du dialogue une fois terminé
+            player.nearbyDialogueObject = boundary.name; // Stocke l'objet de dialogue à proximité
+          });
+          player.onCollideEnd(boundary.name, () => {
+            player.nearbyDialogueObject = null; // Réinitialise lorsqu'il quitte la zone
+            player.isInDialogue = false; 
             stopAnims();
           });
         }
@@ -181,6 +185,10 @@ k.scene("main", async () => {
       k.isKeyDown("left"),
       k.isKeyDown("up"),
       k.isKeyDown("down"),
+      k.isKeyDown("d"),
+      k.isKeyDown("q"),
+      k.isKeyDown("z"),
+      k.isKeyDown("s"),
     ];
 
     let nbOfKeyPressed = 0;
@@ -221,7 +229,60 @@ k.scene("main", async () => {
       player.direction = "down";
       player.move(0, player.speed);
     }
+
+    if (keyMap[4]) {
+      player.flipX = false;
+      if (player.curAnim() !== "walk-side") player.play("walk-side");
+      player.direction = "right";
+      player.move(player.speed, 0);
+      return;
+    }
+
+    if (keyMap[5]) {
+      player.flipX = true;
+      if (player.curAnim() !== "walk-side") player.play("walk-side");
+      player.direction = "left";
+      player.move(-player.speed, 0);
+      return;
+    }
+
+    if (keyMap[6]) {
+      if (player.curAnim() !== "walk-up") player.play("walk-up");
+      player.direction = "up";
+      player.move(0, -player.speed);
+      return;
+    }
+
+    if (keyMap[7]) {
+      if (player.curAnim() !== "walk-down") player.play("walk-down");
+      player.direction = "down";
+      player.move(0, player.speed);
+    }
+
   });
+
+  k.onKeyPress("e", () => {
+    if (player.nearbyDialogueObject && !player.isInDialogue) {
+      player.isInDialogue = true;
+      displayDialogue(dialogueData[player.nearbyDialogueObject], () => (player.isInDialogue = false));
+      stopAnims();
+    }
+  });
+
+    // Ajout de la détection de double-tap pour ouvrir la boîte de dialogue
+    let lastTapTime = 0;
+    k.onTouchStart(() => {
+      const currentTime = Date.now();
+      if (currentTime - lastTapTime < 300) { // 300ms pour détecter un double-tap
+        if (player.nearbyDialogueObject && !player.isInDialogue) {
+          player.isInDialogue = true;
+          displayDialogue(dialogueData[player.nearbyDialogueObject], () => (player.isInDialogue = false));
+          stopAnims();
+        }
+      }
+      lastTapTime = currentTime;
+    });
 });
+
 
 k.go("main");
